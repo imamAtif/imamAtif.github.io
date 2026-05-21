@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Atif Imam — Lead Data Engineer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root{
+      --bg:#09090d;
+      --bg2:#111118;
+      --card:#151520;
+      --border:#242437;
+
+      --gold:#f0a500;
+      --gold2:#ffc940;
+
+      --teal:#00d4b4;
+      --teal2:#66ffe9;
+
+      --text:#f2f2f7;
+      --muted:#9a9ab0;
+
+      --mono:'Space Mono', monospace;
+      --sans:'Syne', sans-serif;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:var(--sans);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+
+      background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+
+      background-size:60px 60px;
+
+      z-index:9999;
+    }
+
+    nav{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+
+      height:80px;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      padding:0 60px;
+
+      background:rgba(9,9,13,0.82);
+      backdrop-filter:blur(14px);
+
+      border-bottom:1px solid var(--border);
+
+      z-index:1000;
+    }
+
+    .logo{
+      font-family:var(--mono);
+      color:var(--gold);
+      font-size:18px;
+      letter-spacing:2px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:40px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--muted);
+      font-family:var(--mono);
+      font-size:13px;
+      transition:0.25s;
+    }
+
+    .nav-links a:hover{
+      color:var(--gold);
+    }
+
+    #hero{
+      min-height:100vh;
+
+      display:grid;
+      grid-template-columns: 0.95fr 1.05fr;
+
+      align-items:center;
+
+      padding:120px 70px 60px;
+      gap:40px;
+    }
+
+    .hero-left{
+      position:relative;
+      z-index:10;
+    }
+
+    .eyebrow{
+      color:var(--teal);
+      font-family:var(--mono);
+      font-size:14px;
+      letter-spacing:2px;
+
+      margin-bottom:24px;
+    }
+
+    .hero-name{
+      font-size:clamp(70px, 8vw, 130px);
+      line-height:0.9;
+      font-weight:800;
+
+      margin-bottom:30px;
+    }
+
+    .hero-name span{
+      display:block;
+      color:var(--gold);
+    }
+
+    .hero-summary{
+      max-width:540px;
+
+      font-size:20px;
+      line-height:1.8;
+
+      color:#c7c7d8;
+
+      margin-bottom:40px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+
+      margin-bottom:50px;
+    }
+
+    .btn{
+      padding:15px 28px;
+      border-radius:8px;
+
+      text-decoration:none;
+
+      font-family:var(--mono);
+      font-size:13px;
+      letter-spacing:1px;
+
+      transition:0.25s;
+    }
+
+    .btn-primary{
+      background:var(--gold);
+      color:#111;
+      font-weight:700;
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-3px);
+      background:var(--gold2);
+      box-shadow:0 10px 30px rgba(240,165,0,0.25);
+    }
+
+    .btn-secondary{
+      border:1px solid var(--border);
+      color:var(--text);
+    }
+
+    .btn-secondary:hover{
+      border-color:var(--gold);
+      color:var(--gold);
+      transform:translateY(-2px);
+    }
+
+    .tech-stack{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .stack{
+      padding:10px 16px;
+
+      background:var(--card);
+
+      border:1px solid var(--border);
+
+      border-radius:10px;
+
+      font-family:var(--mono);
+      font-size:13px;
+
+      color:#d0d0dd;
+    }
+
+    .hero-right{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      position:relative;
+    }
+
+    .pipeline-wrapper{
+      width:100%;
+      max-width:820px;
+
+      border:1px solid var(--border);
+
+      background:
+      radial-gradient(circle at top left, rgba(0,212,180,0.08), transparent 35%),
+      radial-gradient(circle at bottom right, rgba(240,165,0,0.08), transparent 35%),
+      #0f0f16;
+
+      border-radius:24px;
+
+      padding:40px;
+
+      position:relative;
+
+      overflow:hidden;
+    }
+
+    .pipeline-title{
+      font-family:var(--mono);
+      color:var(--teal);
+      font-size:14px;
+      letter-spacing:2px;
+
+      margin-bottom:40px;
+    }
+
+    .pipeline-grid{
+      display:grid;
+      grid-template-columns:repeat(5, 1fr);
+      gap:20px;
+      align-items:start;
+    }
+
+    .stage{
+      position:relative;
+    }
+
+    .stage::after{
+      content:'';
+      position:absolute;
+
+      top:120px;
+      right:-20px;
+
+      width:20px;
+      height:3px;
+
+      background:linear-gradient(to right, var(--gold), var(--teal));
+    }
+
+    .stage:last-child::after{
+      display:none;
+    }
+
+    .stage-header{
+      margin-bottom:14px;
+    }
+
+    .stage-label{
+      color:var(--gold);
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:1px;
+      margin-bottom:6px;
+    }
+
+    .stage-sub{
+      color:var(--muted);
+      font-size:12px;
+      font-family:var(--mono);
+    }
+
+    .stage-card{
+      height:280px;
+
+      background:#12121a;
+
+      border:1px solid var(--border);
+
+      border-radius:18px;
+
+      padding:22px 18px;
+
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+
+      position:relative;
+
+      overflow:hidden;
+
+      transition:0.25s;
+    }
+
+    .stage-card:hover{
+      transform:translateY(-6px);
+      border-color:var(--gold);
+    }
+
+    .stage-card::before{
+      content:'';
+      position:absolute;
+      inset:0;
+
+      background:linear-gradient(
+      180deg,
+      rgba(255,255,255,0.03),
+      transparent
+      );
+
+      pointer-events:none;
+    }
+
+    .icon{
+      font-size:52px;
+      margin-bottom:20px;
+    }
+
+    .stage-name{
+      font-size:22px;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+
+    .stage-desc{
+      font-size:14px;
+      line-height:1.7;
+      color:#b8b8c7;
+    }
+
+    .governance{
+      margin-top:40px;
+
+      border:1px solid var(--border);
+      border-radius:18px;
+
+      padding:24px;
+
+      background:#12121a;
+    }
+
+    .governance-title{
+      color:var(--teal);
+      font-family:var(--mono);
+      font-size:13px;
+      letter-spacing:2px;
+
+      margin-bottom:22px;
+      text-align:center;
+    }
+
+    .governance-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:16px;
+    }
+
+    .gov{
+      text-align:center;
+
+      padding:16px;
+
+      border:1px solid var(--border);
+      border-radius:12px;
+
+      background:#0d0d14;
+    }
+
+    .gov-icon{
+      font-size:26px;
+      margin-bottom:10px;
+    }
+
+    .gov-name{
+      font-size:13px;
+      font-family:var(--mono);
+      color:#d0d0dd;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+
+      border-top:1px solid var(--border);
+
+      background:#0d0d14;
+    }
+
+    .stat{
+      padding:40px;
+      text-align:center;
+      border-right:1px solid var(--border);
+    }
+
+    .stat:last-child{
+      border-right:none;
+    }
+
+    .stat-number{
+      font-size:52px;
+      font-weight:800;
+      color:var(--gold);
+
+      margin-bottom:10px;
+    }
+
+    .stat-text{
+      color:#b8b8c7;
+      line-height:1.7;
+    }
+
+    @media(max-width:1200px){
+
+      .pipeline-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .stage::after{
+        display:none;
+      }
+
+      .governance-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .stats{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media(max-width:900px){
+
+      nav{
+        padding:0 20px;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      #hero{
+        grid-template-columns:1fr;
+        padding:120px 20px 40px;
+      }
+
+      .hero-name{
+        font-size:72px;
+      }
+
+      .pipeline-grid{
+        grid-template-columns:1fr;
+      }
+
+      .governance-grid{
+        grid-template-columns:1fr;
+      }
+
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .stat{
+        border-right:none;
+        border-bottom:1px solid var(--border);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav>
+
+    <div class="logo">
+      ATIF IMAM >_
+    </div>
+
+    <div class="nav-links">
+      <a href="#">ABOUT</a>
+      <a href="#">EXPERIENCE</a>
+      <a href="#">SKILLS</a>
+      <a href="#">ACHIEVEMENTS</a>
+      <a href="#">CONTACT</a>
+    </div>
+
+  </nav>
+
+  <section id="hero">
+
+    <div class="hero-left">
+
+      <div class="eyebrow">
+        DATA ENGINEER · TECH LEAD
+      </div>
+
+      <h1 class="hero-name">
+        ATIF
+        <span>IMAM</span>
+      </h1>
+
+      <p class="hero-summary">
+        I design, build and scale resilient data systems that transform complex
+        business data into trusted analytics platforms using Spark, Airflow,
+        Snowflake and cloud-native infrastructure.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#"
+           class="btn btn-primary">
+          View Experience
+        </a>
+
+        <a href="Atif_imam_lead_data_engineer.pdf"
+           download
+           class="btn btn-secondary">
+          Download Resume
+        </a>
+
+        <a href="mailto:mohd.atifimam@hotmail.com"
+           class="btn btn-secondary">
+          Get In Touch
+        </a>
+
+      </div>
+
+      <div class="tech-stack">
+
+        <div class="stack">Python</div>
+        <div class="stack">PySpark</div>
+        <div class="stack">Airflow</div>
+        <div class="stack">dbt</div>
+        <div class="stack">Snowflake</div>
+        <div class="stack">AWS</div>
+        <div class="stack">GCP</div>
+        <div class="stack">Kubernetes</div>
+
+      </div>
+
+    </div>
+
+    <div class="hero-right">
+
+      <div class="pipeline-wrapper">
+
+        <div class="pipeline-title">
+          ■ MODERN DATA ENGINEERING PLATFORM
+        </div>
+
+        <div class="pipeline-grid">
+
+          <div class="stage">
+
+            <div class="stage-header">
+              <div class="stage-label">DATA SOURCES</div>
+              <div class="stage-sub">Batch + Streaming</div>
+            </div>
+
+            <div class="stage-card">
+
+              <div class="icon">☁</div>
+
+              <div class="stage-name">
+                APIs
+              </div>
+
+              <div class="stage-desc">
+                Databases<br>
+                SaaS Apps<br>
+                Events<br>
+                Files
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="stage">
+
+            <div class="stage-header">
+              <div class="stage-label">INGESTION</div>
+              <div class="stage-sub">Scheduling + Orchestration</div>
+            </div>
+
+            <div class="stage-card">
+
+              <div class="icon">⚙</div>
+
+              <div class="stage-name">
+                Airflow
+              </div>
+
+              <div class="stage-desc">
+                DAG Orchestration<br>
+                Retry Logic<br>
+                Monitoring
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="stage">
+
+            <div class="stage-header">
+              <div class="stage-label">PROCESSING</div>
+              <div class="stage-sub">Transform + Compute</div>
+            </div>
+
+            <div class="stage-card">
+
+              <div class="icon">🔥</div>
+
+              <div class="stage-name">
+                Spark + dbt
+              </div>
+
+              <div class="stage-desc">
+                Data Models<br>
+                Transformations<br>
+                Large Scale Compute
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="stage">
+
+            <div class="stage-header">
+              <div class="stage-label">WAREHOUSE</div>
+              <div class="stage-sub">Storage + Query</div>
+            </div>
+
+            <div class="stage-card">
+
+              <div class="icon">❄</div>
+
+              <div class="stage-name">
+                Snowflake
+              </div>
+
+              <div class="stage-desc">
+                Data Warehouse<br>
+                Optimized Queries<br>
+                Analytics Layer
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="stage">
+
+            <div class="stage-header">
+              <div class="stage-label">CONSUMPTION</div>
+              <div class="stage-sub">Insights + BI</div>
+            </div>
+
+            <div class="stage-card">
+
+              <div class="icon">📊</div>
+
+              <div class="stage-name">
+                Analytics
+              </div>
+
+              <div class="stage-desc">
+                Dashboards<br>
+                BI Tools<br>
+                ML + Reporting
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="governance">
+
+          <div class="governance-title">
+            GOVERNANCE & OBSERVABILITY
+          </div>
+
+          <div class="governance-grid">
+
+            <div class="gov">
+              <div class="gov-icon">🛡</div>
+              <div class="gov-name">Data Quality</div>
+            </div>
+
+            <div class="gov">
+              <div class="gov-icon">📈</div>
+              <div class="gov-name">Monitoring</div>
+            </div>
+
+            <div class="gov">
+              <div class="gov-icon">🚨</div>
+              <div class="gov-name">Alerting</div>
+            </div>
+
+            <div class="gov">
+              <div class="gov-icon">🔗</div>
+              <div class="gov-name">Lineage</div>
+            </div>
+
+            <div class="gov">
+              <div class="gov-icon">🔒</div>
+              <div class="gov-name">Security</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="stats">
+
+    <div class="stat">
+      <div class="stat-number">30%</div>
+      <div class="stat-text">
+        Snowflake Cost Reduction
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number">10×</div>
+      <div class="stat-text">
+        Pipeline Performance Improvement
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number">35%</div>
+      <div class="stat-text">
+        GCP Throughput Improvement
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number">50+</div>
+      <div class="stat-text">
+        Critical Pipelines Maintained
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
